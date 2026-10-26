@@ -2,8 +2,7 @@
 HILL CIPHER
 EX. NO: 3 AIM:
  
-
-IMPLEMENTATION OF HILL CIPHER
+ **IMPLEMENTATION OF HILL CIPHER**
  
 ## To write a C program to implement the hill cipher substitution techniques.
 
@@ -28,8 +27,69 @@ STEP-1: Read the plain text and key from the user. STEP-2: Split the plain text 
 STEP-4: Multiply the two matrices to obtain the cipher text of length three.
 STEP-5: Combine all these groups to get the complete cipher text.
 
-## PROGRAM 
+## PROGRAM :
 
-## OUTPUT
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-## RESULT
+int main()
+{
+    char text[100];
+    int key[3][3], i, j, k;
+    int a[3], sum;
+
+    printf("Enter plain text (letters only): ");
+    scanf("%99s", text);
+
+    printf("Enter 3x3 key matrix:\n");
+    for (i = 0; i < 3; i++)
+        for (j = 0; j < 3; j++)
+            scanf("%d", &key[i][j]);
+
+    int len = strlen(text);
+
+    for (i = 0; i < len; i++)
+        text[i] = toupper((unsigned char)text[i]);
+
+    while (len % 3 != 0)
+        text[len++] = 'X';
+
+    text[len] = '\0';
+
+    printf("Encrypted message: ");
+
+    for (i = 0; i < len; i += 3)
+    {
+        for (j = 0; j < 3; j++)
+            a[j] = text[i + j] - 'A';
+
+        for (j = 0; j < 3; j++)
+        {
+            sum = 0;
+
+            for (k = 0; k < 3; k++)
+                sum += key[j][k] * a[k];
+
+            printf("%c", (sum % 26) + 'A');
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
+```
+
+
+## OUTPUT:
+
+<img width="920" height="537" alt="image" src="https://github.com/user-attachments/assets/4431f525-c705-48f3-a9d3-522cdbe4d791" />
+
+
+## RESULT:
+
+Thus, the implementation of the Hill cipher substitution technique using C language was executed successfully.
+
+
